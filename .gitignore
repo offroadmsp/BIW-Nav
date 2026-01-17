@@ -1,0 +1,5 @@
+Datasets
+vis_des/data
+vis_des/runs
+vis_des/__pycache__
+vis_des/vgg16_netvlad_checkpoint
