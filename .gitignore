@@ -9,3 +9,6 @@ torch_tem_cuda/Checkpoints
 torch_tem_cuda/__pycache__
 *.pyc
 __pycache__
+plot
+scale_ablation/eval_results_minimal
+scale_ablation/results
