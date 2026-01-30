@@ -11,4 +11,8 @@ torch_tem_cuda/__pycache__
 __pycache__
 plot
 scale_ablation/eval_results_minimal
+scale_ablation/eval_results_nmi_optimized
 scale_ablation/results
+scale_ablation/__pycache__
+bio_theory/__pycache__
+bio_theory/plot
