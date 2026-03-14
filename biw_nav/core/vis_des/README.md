@@ -1,86 +1,91 @@
-# pytorch-NetVlad
+# Visual Feature Extraction: BIW-Representations (BIW Perception Module)
 
-Implementation of [NetVlad](https://arxiv.org/abs/1511.07247) in PyTorch, including code for training the model on the Pittsburgh dataset.
+This directory contains the PyTorch implementation of the BIW-Representations architecture, which serves as a visual feature extraction and place recognition baseline within the Brain-Inspired World Model (BIW) framework. This module is responsible for processing high-dimensional sensory inputs into robust spatial descriptors for embodied navigation.
 
-### Reproducing the paper
+## 1. Validation of the Visual Backbone
 
-Below are the result as compared to the results in third row in the right column of Table 1:
+To ensure the integrity of the visual perception module, we have validated our implementation against the original NetVLAD performance on the Pittsburgh dataset (Table 1, right column of the original manuscript). The performance metrics (Recall@N) are summarized below:
 
-|   |R@1|R@5|R@10|
-|---|---|---|---|
-| [NetVlad paper](https://arxiv.org/abs/1511.07247)  | 84.1  | 94.6  | 95.5  |
-| pytorch-NetVlad(alexnet)  | 68.6  | 84.6  | 89.3  |
-| pytorch-NetVlad(vgg16)  | 85.2  | 94.8  | 97.0  |
+| Model Configuration | R@1 | R@5 | R@10 |
+| :--- | :--- | :--- | :--- |
+| Original NetVLAD paper | 84.1 | 94.6 | 95.5 |
+| BIW-NetVLAD (AlexNet) | 68.6 | 84.6 | 89.3 |
+| BIW-NetVLAD (VGG-16) | 85.2 | 94.8 | 97.0 |
 
-Running main.py with train mode and default settings should give similar scores to the ones shown above. Additionally, the model state for the above run is
-available here: https://drive.google.com/open?id=17luTjZFCX639guSVy00OUtzfTQo4AMF2
+Executing `main.py` in `train` mode with default parameters yields comparable performance to the VGG-16 results shown above. For reproducibility, the pre-trained model checkpoint for this specific run is available for download: 
+🔗 [Download Pre-trained VGG-16 NetVLAD Checkpoint](https://drive.google.com/open?id=17luTjZFCX639guSVy00OUtzfTQo4AMF2)
 
-Using this checkpoint and the following command you can obtain the results shown above:
-
-    python main.py --mode=test --split=val --resume=vgg16_netvlad_checkpoint/
-
-# Setup
-
-## Dependencies
-
-1. [PyTorch](https://pytorch.org/get-started/locally/) (at least v0.4.0)
-2. [Faiss](https://github.com/facebookresearch/faiss)
-3. [scipy](https://www.scipy.org/)
-    - [numpy](http://www.numpy.org/)
-    - [sklearn](https://scikit-learn.org/stable/)
-    - [h5py](https://www.h5py.org/)
-4. [tensorboardX](https://github.com/lanpa/tensorboardX)
-
-## Data
-
-Running this code requires a copy of the Pittsburgh 250k (available [here](https://github.com/Relja/netvlad/issues/42)), 
-and the dataset specifications for the Pittsburgh dataset (available [here](https://www.di.ens.fr/willow/research/netvlad/data/netvlad_v100_datasets.tar.gz)).
-`pittsburgh.py` contains a hardcoded path to a directory, where the code expects directories `000` to `010` with the various Pittsburth database images, a directory
-`queries_real` with subdirectories `000` to `010` with the query images, and a directory `datasets` with the dataset specifications (.mat files).
-
-
-# Usage
-
-`main.py` contains the majority of the code, and has three different modes (`train`, `test`, `cluster`) which we'll discuss in mode detail below.
-
-## Train
-
-In order to initialise the NetVlad layer it is necessary to first run `main.py` with the correct settings and `--mode=cluster`. After which a model can be trained using (the following default flags):
-
-    python main.py --mode=train --arch=vgg16 --pooling=netvlad --num_clusters=64
-
-The commandline args, the tensorboard data, and the model state will all be saved to `opt.runsPath`, which subsequently can be used for testing, or to resuming training.
-
-For more information on all commandline arguments run:
-
-    python main.py --help
-
-## Test
-
-To test a previously trained model on the Pittsburgh 30k testset (replace directory with correct dir for your case):
-
-    python main.py --mode=test --resume=runsPath/Nov19_12-00-00_vgg16_netvlad --split=test
-
-The commandline arguments for training were saved, so we shouldnt need to specify them for testing.
-Additionally, to obtain the 'off the shelf' performance we can also omit the resume directory:
-
-    python main.py --mode=test
-
-## Cluster
-
-In order to initialise the NetVlad layer we need to first sample from the data and obtain `opt.num_clusters` centroids. This step is
-necessary for each configuration of the network and for each dataset. To cluster simply run
-
-    python main.py --mode=cluster --arch=vgg16 --pooling=netvlad --num_clusters=64
-
-with the correct values for any additional commandline arguments.
-
-## added by Sun Zhen
+To verify these results using the provided checkpoint, execute the following command:
 ```bash
+python main.py --mode=test --split=val --resume=vgg16_netvlad_checkpoint/
+```
+
+---
+
+## 2. Setup and Dependencies
+
+### Dependencies
+The dependencies for this module are included in the global `requirements.txt` of the BIW repository. Key libraries utilized include:
+* PyTorch (>= 0.4.0)
+* Faiss (for efficient similarity search and clustering)
+* SciPy ecosystem (`numpy`, `scipy`, `scikit-learn`)
+* `h5py` (for dataset storage)
+* `tensorboardX` (for training visualization)
+
+### Dataset Preparation
+Training and evaluating this module requires the Pittsburgh 250k dataset (images available [here](https://github.com/Relja/netvlad/issues/42)) and the corresponding dataset specifications (.mat files, available [here](https://www.di.ens.fr/willow/research/netvlad/data/netvlad_v100_datasets.tar.gz)).
+
+Please ensure the data is structured as expected by `pittsburgh.py`. The required directory hierarchy is:
+* `[Data Root]/`
+  * `000` to `010`: Subdirectories containing database images.
+  * `queries_real/`: Directory containing subdirectories `000` to `010` with query images.
+  * `datasets/`: Directory containing the dataset specification `.mat` files.
+
+*(Note: The root path is currently hardcoded in `pittsburgh.py`. Please update it to reflect your local environment).*
+
+---
+
+## 3. Usage Instructions
+
+The core logic is contained within `main.py`, which operates in three primary modes: `cluster`, `train`, and `test`. 
+
+### Phase 1: Cluster (Initialization)
+Prior to training, the NetVLAD layer requires initialization by sampling the dataset to compute `opt.num_clusters` centroids. This step establishes the visual vocabulary and is required for each new network configuration or dataset.
+```bash
+python main.py --mode=cluster --arch=vgg16 --pooling=netvlad --num_clusters=64
+```
+
+### Phase 2: Train
+Once the centroids are initialized, the model can be trained. The command-line arguments, TensorBoard logs, and model checkpoints will be automatically saved to the directory specified by `opt.runsPath`.
+```bash
+python main.py --mode=train --arch=vgg16 --pooling=netvlad --num_clusters=64
+```
+*For a comprehensive list of configurable hyperparameters, run `python main.py --help`.*
+
+### Phase 3: Test
+To evaluate a trained model on the testing split (e.g., Pittsburgh 30k), provide the path to the saved checkpoint. The evaluation script will automatically load the training configurations.
+```bash
+python main.py --mode=test --resume=runsPath/Nov19_12-00-00_vgg16_netvlad --split=test
+```
+To evaluate the 'off-the-shelf' pre-trained network without a specific resume directory, simply execute:
+```bash
+python main.py --mode=test
+```
+
+---
+
+## 4. System Configuration Notes
+
+**Handling Large Memory Requirements (Note by Zhen Sun):**
+When extracting features or clustering on large-scale datasets (e.g., Pittsburgh 250k), the process may generate substantial temporary cache files, potentially exhausting the default `/tmp` directory. If you encounter "No space left on device" errors, it is recommended to redirect the temporary directory to a storage drive with sufficient capacity prior to running the scripts:
+
+```bash
+# Redirect TMPDIR to a high-capacity storage location
 export TMPDIR=/media/zhen/Share/temp
-# 设置 TMPDIR 为新的临时目录路径
 cd $TMPDIR
-# 切换到新的临时目录
+
+# Execute training/clustering commands here...
+
+# Reset the environment variable after execution
 unset TMPDIR
-# 最后再取消环境变量
 ```

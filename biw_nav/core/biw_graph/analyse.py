@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Optimized Analysis Functions with CUDA Support
-Created on Thu May 28 15:01:34 2020
-@author: jacobb (optimized for CUDA)
-"""
+
 
 import numpy as np
 import torch

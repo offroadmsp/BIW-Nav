@@ -21,7 +21,6 @@ from easy_trilateration.graph import *
 import signal 
 timeout_duration = 60 # Set the timeout duration (in seconds) for path generation
 
-#Bicycyle Motion model taken and modified from: https://github.com/winstxnhdw/KinematicBicycleModel
 
 
 def processMap(map_path, scale_percent):

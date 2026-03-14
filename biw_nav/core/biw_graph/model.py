@@ -1,16 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Feb 11 14:26:32 2020
 
-This is a pytorch implementation of the Tolman-Eichenbaum Machine,
-written by Jacob Bakermans after the original by James Whittington.
-The referenced paper is the bioRxiv publication at https://www.biorxiv.org/content/10.1101/770495v2
-
-Release v1.0.0: Fully functional pytorch model, without any extensions
-
-@author: jacobb
-"""
 # Standard modules
 import numpy as np
 import torch

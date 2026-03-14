@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Mar 30 14:35:30 2020
 
-@author: jacobb
-"""
 
 # Functions for plotting training and results of TEM
 

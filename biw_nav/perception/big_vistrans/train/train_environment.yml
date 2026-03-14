@@ -1,4 +1,4 @@
-name: nomad_train
+name: biw_train
 channels:
 - defaults
 - pytorch

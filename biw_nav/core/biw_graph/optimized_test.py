@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Optimized Test Script with CUDA Support
-Created on Thu Jul  2 09:35:57 2020
-@author: jacobb (optimized for CUDA)
-"""
+
 
 # Standard library imports
 import numpy as np

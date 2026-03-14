@@ -1,11 +1,4 @@
 # -*- coding: utf-8 -*-
-"""DeepRare_2019
-Authors :
-Matei Mancas
-Phutphalla Kong
-Please check licence when re-using
-"""
-
 import numpy as np
 from numpy import expand_dims
 

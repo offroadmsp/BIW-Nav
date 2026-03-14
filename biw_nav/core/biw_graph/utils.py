@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Wed Feb 12 15:03:58 2020
 
-@author: jacobb
-"""
 
 import torch
 import numpy as np
