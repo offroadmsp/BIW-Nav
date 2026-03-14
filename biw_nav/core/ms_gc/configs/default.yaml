@@ -1,0 +1,21 @@
+model:
+  # grid_scales: [0.5, 1.0, 2.0]
+  grid_scales: [0.1, 0.5, 1.0]
+  num_cells_per_scale: [64, 64, 64]
+  spatial_resolution: 0.1
+
+training:
+  batch_size: 128
+  num_epochs: 100
+  learning_rate: 0.001
+  save_interval: 10
+  checkpoint_dir: ms_gc/checkpoints/
+  resume_from_checkpoint: false
+  checkpoint_path: ms_gc/checkpoints/checkpoint_epoch_99.pth
+  
+data:
+  data_dir: ms_gc/data/
+  pics_dir: ms_gc/pics/
+  
+
+seed: 42
