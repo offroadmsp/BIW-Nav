@@ -51,7 +51,7 @@ def train_model(model, train_loader, device, epochs=10, lr=1e-3, save_path="time
         print(f"Epoch {epoch+1}/{epochs} | Loss: {total_loss/len(train_loader):.6f}")
 
     torch.save(model.state_dict(), save_path)
-    print(f"✅ Model saved to {save_path}")
+    print(f"Model saved to {save_path}")
 
 
 # --- Main Execution Block (Combines Cell 5 and calls) ---

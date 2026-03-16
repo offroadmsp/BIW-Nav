@@ -97,7 +97,7 @@ def run_training(exp_name, dataset, ablation_config, train_cfg=TRAIN_CONFIG, mod
     # 3. 保存
     model_path = os.path.join(save_dir, "model_final.pth")
     torch.save(model.state_dict(), model_path)
-    print(f"✅ Model saved to: {model_path}")
+    print(f"Model saved to: {model_path}")
     return model_path
 
 # --- 核心函数 2: 评估 (包含所有 NMI 图表) ---

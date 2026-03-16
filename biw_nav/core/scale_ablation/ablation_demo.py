@@ -25,7 +25,7 @@ def run_demo():
         use_yaw=True  # 确保包含 yaw 数据，匹配模型 feature_dim=3
     )
     
-    print(f"✅ Dataset loaded. Total trajectories: {len(dataset)}")
+    print(f"Dataset loaded. Total trajectories: {len(dataset)}")
     
     # ==========================================
     # Phase 0: CANN Theoretical Analysis (Fig 7)
@@ -37,7 +37,7 @@ def run_demo():
     sim_traj = 2.0 * np.sin(0.5 * np.arange(500) * dt)
     # 简单调用一下确保模块无误 (绘图建议在 Notebook 中完成)
     _ = cann_analysis.run_alpha_sweep(np.linspace(0, 1, 5), sim_traj, tau0=20.0, dt=dt)
-    print("✅ CANN simulation module verified.")
+    print("CANN simulation module verified.")
     
     # ==========================================
     # Phase 2: Evaluation & Plotting

@@ -42,7 +42,7 @@ class VariableLengthTrajectoryDataset(Dataset):
             transforms.Resize((64,64)),
             transforms.ToTensor()
         ])
-        print(f"✅ Found {len(self.trajectories)} trajectories in {root_dir}")
+        print(f"Found {len(self.trajectories)} trajectories in {root_dir}")
 
     def __len__(self):
         return len(self.trajectories)

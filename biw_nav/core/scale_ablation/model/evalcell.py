@@ -246,7 +246,7 @@ def analyze_cognitive_structure(model, loader, results, device, save_dir="./eval
         plt.tight_layout()
         plt.savefig(os.path.join(save_dir, "structure_A_similarity_sorted.pdf"))
         plt.close()
-        print("✅ Generated: Sorted Similarity Matrix (Optimized)")
+        print("Generated: Sorted Similarity Matrix (Optimized)")
 
     # --- 图 B: ΔDistance Heatmap (核心升级：统一色标 + 明确图例) ---
     
@@ -303,7 +303,7 @@ def analyze_cognitive_structure(model, loader, results, device, save_dir="./eval
     
     plt.savefig(os.path.join(save_dir, "structure_B_delta_geometry.pdf"))
     plt.close()
-    print("✅ Generated: Delta Geometry Heatmaps (Shared Scale)")
+    print("Generated: Delta Geometry Heatmaps (Shared Scale)")
 
     return {
         'sorted_indices': sorted_indices,

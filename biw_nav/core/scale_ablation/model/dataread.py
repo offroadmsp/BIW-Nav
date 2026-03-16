@@ -37,7 +37,7 @@ class VariableLengthTrajectoryDataset(Dataset):
             transforms.Resize((64,64)),
             transforms.ToTensor()
         ])
-        print(f"✅ Found {len(self.trajectories)} trajectories in {root_dir}")
+        print(f"Found {len(self.trajectories)} trajectories in {root_dir}")
 
         # 🧩 自动识别输出维度 (Position dimension only for target)
         if not self.trajectories:

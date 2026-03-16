@@ -60,10 +60,10 @@ def analyze_time_cells(model, loader, device, n_cells_to_plot=16, save_dir="./ev
 
              B = lstm_out.shape[0]
              for b in range(B):
-                 L = int(mask_cpu[b].sum().item())   # ✅ Real length
+                 L = int(mask_cpu[b].sum().item())   # Real length
                  if L <= 0:
                      continue
-                 all_hidden_states.append(lstm_out[b, :L, :].numpy())  # ✅ Save valid segment only
+                 all_hidden_states.append(lstm_out[b, :L, :].numpy())  # Save valid segment only
 
     if not all_hidden_states:
          print("Error: No hidden states collected.")
