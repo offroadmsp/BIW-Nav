@@ -4,11 +4,13 @@ import torch
 import numpy as np
 from config.config import DATA_ROOT_DIR
 # [修改] 导入正确的类名
-from dataset import VariableLengthTrajectoryDataset
-from runner import run_training, run_evaluation
-from model import cann_analysis 
 
-def main():
+
+from biw_nav.core.scale_ablation.dataset import VariableLengthTrajectoryDataset
+from biw_nav.core.scale_ablation.runner import run_training, run_evaluation
+from biw_nav.core.scale_ablation.model import cann_analysis 
+
+def run_demo():
     # 1. 准备数据
     print(f"Loading dataset from {DATA_ROOT_DIR}...")
     
@@ -38,18 +40,6 @@ def main():
     print("✅ CANN simulation module verified.")
     
     # ==========================================
-    # Phase 1: Training (Models)
-    # ==========================================
-    # 1. Full Fusion (Visual + Kinematics)
-    run_training("Exp_Full_Fusion", dataset, {'use_visual': True, 'use_kinematics': True})
-    
-    # 2. Visual Only
-    run_training("Exp_Visual_Only", dataset, {'use_visual': True, 'use_kinematics': False})
-    
-    # 3. Kinematics Only
-    run_training("Exp_Kinematics_Only", dataset, {'use_visual': False, 'use_kinematics': True})
-    
-    # ==========================================
     # Phase 2: Evaluation & Plotting
     # ==========================================
     print("\n>>> Starting Evaluation Phase...")
@@ -74,6 +64,3 @@ def main():
     pr("Visual Only", m_vis)
     pr("Kinematics Only", m_kin)
     print("="*40)
-
-if __name__ == "__main__":
-    main()

@@ -1,15 +1,25 @@
 # runner.py
 import os
+import sys
 import torch
 import torch.nn as nn
 import numpy as np
 from torch.utils.data import DataLoader
-from config import TRAIN_CONFIG, MODEL_CONFIG, RESULTS_DIR, DEVICE
+# 如果你的脚本嵌套了多层（例如 scripts/test/demo.py），需相应多加一个 os.path.dirname
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# 将项目根目录加入环境变量
+if ROOT_DIR not in sys.path:
+    sys.path.append(ROOT_DIR)
+
+from config.config import TRAIN_CONFIG, MODEL_CONFIG, RESULTS_DIR, DEVICE
+
+
 
 # 导入你的模块
-from dataset import collate_variable_length
-from model.visualNet import VisualTemporalNet_Optimized
-from model import plotcell, evalcell, evaltraj
+from biw_nav.core.scale_ablation.dataset import collate_variable_length
+from biw_nav.core.scale_ablation.model.visualNet import VisualTemporalNet_Optimized
+from biw_nav.core.scale_ablation.model import plotcell, evalcell, evaltraj
 
 # NMI 评估器辅助类 (简单的静态方法封装)
 class NMI_Evaluator:

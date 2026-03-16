@@ -1,3 +1,4 @@
+import os
 import matplotlib.pyplot as plt
 import matplotlib.axes as axes
 import numpy as np
@@ -15,9 +16,16 @@ import time
 from os import listdir
 import sys
 
+# 如果你的脚本嵌套了多层（例如 scripts/test/demo.py），需相应多加一个 os.path.dirname
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# 将项目根目录加入环境变量
+if ROOT_DIR not in sys.path:
+    sys.path.append(ROOT_DIR)
+
 from tqdm import tqdm
 sys.path.append('./mcan')
-from CAN import headDirectionAndPlaceNoWrapNet, pathIntegration, errorTwoCoordinateLists, positionToVel2D
+from biw_nav.core.mcan.CAN import headDirectionAndPlaceNoWrapNet, pathIntegration, errorTwoCoordinateLists, positionToVel2D
 # plt.style.use(['science','ieee'])
 # plt.style.use(['science','no-latex'])
 

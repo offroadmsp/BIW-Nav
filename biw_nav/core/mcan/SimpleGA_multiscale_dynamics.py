@@ -1,6 +1,8 @@
+import os
 import random
+import sys
 import numpy as np
-from CAN import attractorNetwork2D, attractorNetwork, activityDecoding,activityDecodingAngle,headDirectionAndPlaceNoWrapNet
+
 import matplotlib.pyplot as plt
 import math
 import time 
@@ -8,6 +10,14 @@ import multiprocessing
 from multiprocessing import freeze_support
 from functools import partial
 import logging
+# 如果你的脚本嵌套了多层（例如 scripts/test/demo.py），需相应多加一个 os.path.dirname
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# 将项目根目录加入环境变量
+if ROOT_DIR not in sys.path:
+    sys.path.append(ROOT_DIR)
+
+from CAN import attractorNetwork2D, attractorNetwork, activityDecoding,activityDecodingAngle,headDirectionAndPlaceNoWrapNet
 # plt.style.use(['science', 'no-latex'])
 plt.style.use(['science','ieee'])
 
