@@ -31,7 +31,7 @@ from biw_nav.core.scale_ablation.model import cann_analysis
 from biw_nav.core.scale_ablation import config  # 如果你有这个模型的话，可以在此处导入
 from biw_nav.core.scale_ablation import ablation_demo  # 如果你有这个模型的话，可以在此处导入
 
-from biw_nav.core.mcan import SelectiveMultiScalewithWraparound2D
+# from biw_nav.core.mcan import SelectiveMultiScalewithWraparound2D
 
 # 尝试导入你的本地模块 (使用 try-except 防止审稿人运行路径错误导致崩溃)
 try:
