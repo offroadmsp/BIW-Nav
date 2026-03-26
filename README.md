@@ -34,7 +34,7 @@ git clone [https://github.com/offroadmsp/BIW-Nav.git](https://github.com/offroad
 cd BIW-Nav
 
 # 2. Create and activate a Conda virtual environment
-conda create -n biw_nav python=3.10 -y
+conda create -n biw_nav python=3.12 -y
 conda activate biw_nav
 
 # 3. Install required dependencies
